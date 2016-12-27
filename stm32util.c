@@ -14,6 +14,22 @@ void GPIO_Config(GPIO gpio, GPIOMode_TypeDef mode, GPIOSpeed_TypeDef speed, GPIO
 	GPIO_Init(GPIO_PIN_GRP(gpio), &io);
 }
 
+void GPIO_IN(GPIO gpio)
+{
+	GPIO_Config(gpio, GPIO_Mode_IN, GPIO_Fast_Speed, GPIO_OType_OD, GPIO_PuPd_NOPULL);
+}
+
+void GPIO_OUT(GPIO gpio)
+{
+	GPIO_Config(gpio, GPIO_Mode_OUT, GPIO_Fast_Speed, GPIO_OType_PP, GPIO_PuPd_NOPULL);
+}
+
+void GPIO_AF(GPIO gpio, uint8_t af)
+{
+	GPIO_PinAFConfig(GPIO_PIN_GRP(gpio), GPIO_PIN_NUM(gpio), af);
+	GPIO_Config(gpio, GPIO_Mode_AF, GPIO_Fast_Speed, GPIO_OType_PP, GPIO_PuPd_NOPULL);
+}
+
 void TIM_Config(TIM_TypeDef* timx, u16 prescaler, u16 counter_mode, u32 period, u16 clock_division, u8 repetition_counter)
 {
 	TIM_TimeBaseInitTypeDef tim;
